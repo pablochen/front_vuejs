@@ -1,0 +1,36 @@
+package autoswan.app.entity;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import javax.persistence.*;
+
+@Entity
+@Getter @Setter
+@NoArgsConstructor
+@SequenceGenerator(name="VACATION_SEQ_GEN", sequenceName="VACATION_SEQ", initialValue=1, allocationSize=1)
+public class Vacation {
+    @Id
+    @Column(name = "VACATION_ID")
+    @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="VACATION_SEQ_GEN")
+    private int id;
+
+    @Column(name = "VACATION_CODE", columnDefinition = "VARCHAR(3)", unique = true)
+    private String code;
+
+    @Column(name = "VACATION_NAME", columnDefinition = "VARCHAR(30)")
+    private String name;
+
+    private int days;
+
+    @Column(columnDefinition = "VARCHAR(1)")
+    private String useYn;
+
+    public Vacation(String vacationCode, String vacationName, int days){
+        this.code = vacationCode;
+        this.name = vacationName;
+        this.days = days;
+        this.useYn = "Y";
+    }
+}
