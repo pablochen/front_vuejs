@@ -3,7 +3,7 @@
   <div>
     <VacationHeader></VacationHeader>
     <UserList :key="userListKey"></UserList>
-    <VacationInput :key="vacationInputKey"></VacationInput>
+    <VacationInput :key="vacationInputKey" v-bind:vacationItems="vacationItems"></VacationInput>
     <VacationFooter></VacationFooter>
   </div>
 </template>
@@ -20,7 +20,8 @@ export default {
   data() {
     return {
       userListKey: 'userListKey0',
-      vacationInputKey: 'vacationInputKey0'
+      vacationInputKey: 'vacationInputKey0',
+      vacationItems: []
     };
   },
   components: {
@@ -30,6 +31,25 @@ export default {
     'VacationFooter': VacationFooter
   },
   methods: {
+    getVacationList: function() {
+      const baseURI = 'http://localhost:8080';
+      this.$http.get(`${baseURI}/master/getVacationList`)
+      .then((result) => {
+        this.vacationItems = result.data.content
+        this.reRender('VacationInput')
+      })
+    },
+    reRender(compName) {
+      switch (compName) {
+        case 'VacationInput':
+          this.vacationInputKey += 1
+          break;
+        default:
+      }
+    }
+  },
+  created() {
+    this.getVacationList()
   }
 }
 </script>

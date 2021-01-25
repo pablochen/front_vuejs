@@ -12,11 +12,9 @@ import 'tui-grid/dist/tui-grid.css'
 import { Grid } from '@toast-ui/vue-grid'
 
 export default {
-  props: ['deptItems', 'positionItems'],
+  props: ['vacationItems'],
   data() {
      return {
-       depts: this.deptItems,
-       positions: this.positionItems
      }
   },
   components: {
@@ -55,13 +53,21 @@ export default {
     }
   },
   created() {
+    console.log('create')
+    console.log(this.vacationItems)
+
+    let vacations = []
+    this.vacationItems.forEach((vacation)=>{
+      vacations.push({text:vacation.name, value:vacation.code});
+    })
+
     this.gridProps = {
       columns: [
-        { header: '사번',     name: 'code',         editor: 'text' },
-        { header: '사원명',   name: 'name',         editor: 'text' },
+        { header: '사번',     name: 'code'},
+        { header: '사원명',   name: 'name'},
         { header: '시작일',   name: 'startDate',    editor: 'text' },
         { header: '종료일',   name: 'endDate',      editor: 'text' },
-        { header: '휴가선택', name: 'vacationCode', editor: 'text' }
+        { header: '휴가선택', name: 'vacationCode', editor: { type: 'select', options: { listItems: vacations } }}
       ],
       data: []
     }

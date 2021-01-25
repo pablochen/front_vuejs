@@ -30,18 +30,9 @@ export default {
           return;
         }
 
-        let id = keys[0].id
-        
-        /*
-        const baseURI = 'http://localhost:8080';
-        this.$http.post(`${baseURI}/master/deleteUsers`, data)
-        .then((result) => {
-          this.$refs.tuiGrid.invoke('removeCheckedRows');
-        })
-        .catch(error=>{
-          console.log(error)
-        });
-        */
+        console.log(keys[0].id)
+        console.log(keys[0].userCode)
+        console.log(keys[0].userName)
     }
   },
   beforeMount(){

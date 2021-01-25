@@ -62,13 +62,6 @@ public class MasterController {
         deptRepository.save(dept);
     }
 
-    @GetMapping("/deleteDept")
-    public void deleteDept (Dept dept){
-        Dept delDept = deptRepository.findById(dept.getId()).get();
-        delDept.setUseYn("N");
-        deptRepository.save(delDept);
-    }
-
     @GetMapping("/getPositionList")
     public ResponseEntity getPositionList (final Pageable pageable){
         Page<Position> positionList = positionRepository.findByUseYnEquals("Y", pageable);
@@ -81,13 +74,6 @@ public class MasterController {
         positionRepository.save(position);
     }
 
-    @GetMapping("/deletePosition")
-    public void deletePosition (Position position){
-        Position delPosition = positionRepository.findById(position.getId()).get();
-        delPosition.setUseYn("N");
-        positionRepository.save(delPosition);
-    }
-
     @GetMapping("/getVacationList")
     public ResponseEntity getVacationList (final Pageable pageable){
         Page<Vacation> vacationList = vacationRepository.findByUseYnEquals("Y", pageable);
@@ -98,13 +84,6 @@ public class MasterController {
     public void setDept (@RequestBody VacationDto vacationDto){
         Vacation vacation = new Vacation(vacationDto.getVacationCode(), vacationDto.getVacationName(), vacationDto.getDays());
         vacationRepository.save(vacation);
-    }
-
-    @GetMapping("/deleteVacation")
-    public void deleteUser (Vacation vacation){
-        Vacation delVacation = vacationRepository.findById(vacation.getId()).get();
-        delVacation.setUseYn("N");
-        vacationRepository.save(delVacation);
     }
 
 }
