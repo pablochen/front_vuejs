@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h3>사원추가</h3>
+    <h3>휴가 신청</h3>
     <grid ref="tuiGrid" :data="gridProps.data" :columns="gridProps.columns"/>
     <button v-on:click="setUser">저장</button>
   </section>
@@ -12,18 +12,26 @@ import 'tui-grid/dist/tui-grid.css'
 import { Grid } from '@toast-ui/vue-grid'
 
 export default {
+  props: ['deptItems', 'positionItems'],
+  data() {
+     return {
+       depts: this.deptItems,
+       positions: this.positionItems
+     }
+  },
   components: {
     'grid': Grid
   },
   methods: {
     setUser: function() {
+      /*
       const userRow = this.$refs.tuiGrid.invoke('getData')[0];
 
       if(userRow.code==null || userRow.name==null || userRow.deptCode==null ||
-        userRow.positionCode==null || userRow.joinDate==null){
+          userRow.positionCode==null || userRow.joinDate==null){
           alert("모든 값 필요")
           return
-        }
+      }
 
       const data = {
         userCode : userRow.code,
@@ -43,22 +51,23 @@ export default {
         this.$emit('reRender', 'UserList')
         this.$emit('reRender', 'UserInput')
       })
+      */
     }
   },
   created() {
     this.gridProps = {
       columns: [
-        { header: '사번',     name: 'code',        editor: 'text' },
+        { header: '사번',     name: 'code',         editor: 'text' },
         { header: '사원명',   name: 'name',         editor: 'text' },
-        { header: '부서코드', name: 'deptCode',     editor: 'text' },
-        { header: '직책코드', name: 'positionCode', editor: 'text' },
-        { header: '입사일',   name: 'joinDate',     editor: 'text' }
+        { header: '시작일',   name: 'startDate',    editor: 'text' },
+        { header: '종료일',   name: 'endDate',      editor: 'text' },
+        { header: '휴가선택', name: 'vacationCode', editor: 'text' }
       ],
       data: []
     }
   },
   mounted() {
-    this.$refs.tuiGrid.invoke('appendRow', [], []);
+    this.$refs.tuiGrid.invoke('appendRow', [], [])
   }
 }
 </script>

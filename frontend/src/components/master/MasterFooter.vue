@@ -1,7 +1,5 @@
 <template>
-  <header>
-    <h1>Master Header</h1>
-  </header>
+  <!--<h1>Master Footer</h1>-->
 </template>
 
 <script>
@@ -10,5 +8,5 @@ export default{
 }
 </script>
 
-<style scoped>
+<style>
 </style>

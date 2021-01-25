@@ -8,11 +8,9 @@ import axios from 'axios'
 Vue.prototype.$http = axios
 
 // eslint-disable-next-line
-var vm = new Vue({
+new Vue({
   el: '#app',
   router,
   components: { App },
   template: '<App/>'
 })
-
-global.vm = vm;

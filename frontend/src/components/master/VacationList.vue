@@ -31,7 +31,8 @@ export default {
       columns: [
         { header: '휴가ID',   name: 'id' },
         { header: '휴가코드', name: 'code' },
-        { header: '휴가명',   name: 'name' }
+        { header: '휴가명',   name: 'name' },
+        { header: '소요일수', name: 'days' }
       ],
       data: []
     }

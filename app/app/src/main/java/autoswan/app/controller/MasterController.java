@@ -1,9 +1,6 @@
 package autoswan.app.controller;
 
-import autoswan.app.dto.DeptDto;
-import autoswan.app.dto.PositionDto;
-import autoswan.app.dto.UserDto;
-import autoswan.app.dto.VacationDto;
+import autoswan.app.dto.*;
 import autoswan.app.entity.Dept;
 import autoswan.app.entity.Position;
 import autoswan.app.entity.User;
@@ -19,6 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/master")
@@ -31,7 +30,8 @@ public class MasterController {
 
     @GetMapping("/getUserList")
     public ResponseEntity getUserList (final Pageable pageable){
-        Page<User> userList = userRepository.findByUseYnEquals("Y", pageable);
+        UserDto userDto = new UserDto();
+        Page<UserDto> userList = userRepository.findUsers(userDto, pageable);
         return new ResponseEntity<>(userList, HttpStatus.OK);
     }
 
@@ -41,11 +41,13 @@ public class MasterController {
         userRepository.save(user);
     }
 
-    @GetMapping("/deleteUser")
-    public void deleteUser (User user){
-        User delUser = userRepository.findById(user.getId()).get();
-        delUser.setUseYn("N");
-        userRepository.save(user);
+    @PostMapping("/deleteUsers")
+    public void deleteUsers (@RequestBody UserDto userDto){
+        List<User> delUsers = userRepository.findAllByIdIn(userDto.getIds());
+        for(User delUser: delUsers) {
+            delUser.setUseYn("N");
+            userRepository.save(delUser);
+        }
     }
 
     @GetMapping("/getDeptList")

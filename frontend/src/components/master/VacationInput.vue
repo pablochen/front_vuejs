@@ -18,15 +18,15 @@ export default {
   methods: {
     setVacation: function() {
       const vacationRow = this.$refs.tuiGrid.invoke('getData')[0];
-
-      if(vacationRow.code==null || vacationRow.name==null){
+      if(vacationRow.code==null || vacationRow.name==null || vacationRow.days==null){
           alert("모든 값 필요")
           return
         }
 
       const data = {
         vacationCode : vacationRow.code,
-        vacationName : vacationRow.name
+        vacationName : vacationRow.name,
+        days : vacationRow.days
       }
 
       const headers = {
@@ -45,7 +45,8 @@ export default {
     this.gridProps = {
       columns: [
         { header: '휴가코드', name: 'code', editor: 'text' },
-        { header: '휴가명',   name: 'name', editor: 'text' }
+        { header: '휴가명',   name: 'name', editor: 'text' },
+        { header: '소요일수', name: 'days', editor: 'text' }
       ],
       data: []
     }

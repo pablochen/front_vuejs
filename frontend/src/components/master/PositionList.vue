@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h3>사원정보</h3>
+    <h3>직책정보</h3>
     <grid ref="tuiGrid" :data="gridProps.data" :columns="gridProps.columns"/>
   </section>
 </template>
@@ -15,29 +15,27 @@ export default {
     'grid': Grid
   },
   methods: {
-    getUserList: function() {
+    getPositionList: function() {
       const baseURI = 'http://localhost:8080';
-      this.$http.get(`${baseURI}/master/getUserList`)
+      this.$http.get(`${baseURI}/master/getPositionList`)
       .then((result) => {
         this.$refs.tuiGrid.invoke('appendRows', result.data.content);
+        this.$emit('rePositionItems', result.data.content)
       })
     }
   },
   beforeMount(){
-    this.getUserList()
+    this.getPositionList()
   },
   created() {
     this.gridProps = {
       columns: [
-        { header: '사원ID',   name: 'id' },
-        { header: '사번',     name: 'code' },
-        { header: '사원명',   name: 'name' },
-        { header: '부서코드', name: 'deptCode' },
-        { header: '직책코드', name: 'positionCode'},
-        { header: '보유연차', name: 'totalVacCnt' },
-        { header: '입사일',   name: 'joinDate' }
+        { header: '직책ID',   name: 'id' },
+        { header: '직책코드', name: 'code' },
+        { header: '직책명',   name: 'name' }
       ],
-      data: []
+      data: [],
+      bodyHeight: 300
     }
   }
 }
@@ -45,4 +43,7 @@ export default {
 </script>
 
 <style>
+grid {
+  height: 300px;
+}
 </style>

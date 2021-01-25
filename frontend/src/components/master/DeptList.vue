@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h3>직책정보</h3>
+    <h3>부서정보</h3>
     <grid ref="tuiGrid" :data="gridProps.data" :columns="gridProps.columns"/>
   </section>
 </template>
@@ -15,23 +15,24 @@ export default {
     'grid': Grid
   },
   methods: {
-    getPositionList: function() {
+    getDeptList: function() {
       const baseURI = 'http://localhost:8080';
-      this.$http.get(`${baseURI}/master/getPositionList`)
+      this.$http.get(`${baseURI}/master/getDeptList`)
       .then((result) => {
-        this.$refs.tuiGrid.invoke('appendRows', result.data.content);
+        this.$refs.tuiGrid.invoke('appendRows', result.data.content)
+        this.$emit('reDeptItems', result.data.content)
       })
     }
   },
   beforeMount(){
-    this.getPositionList()
+    this.getDeptList()
   },
   created() {
     this.gridProps = {
       columns: [
-        { header: '직책ID',   name: 'id' },
-        { header: '직책코드', name: 'code' },
-        { header: '직책명',   name: 'name' }
+        { header: '부서ID',   name: 'id' },
+        { header: '부서코드', name: 'code' },
+        { header: '부서명',   name: 'name' }
       ],
       data: []
     }

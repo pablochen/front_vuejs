@@ -1,5 +1,5 @@
 <template>
-  <h1>Master Footer</h1>
+  <!--<h1>Master Footer</h1>-->
 </template>
 
 <script>

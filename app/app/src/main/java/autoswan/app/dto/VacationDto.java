@@ -9,10 +9,10 @@ import lombok.NoArgsConstructor;
 public class VacationDto {
     private String vacationCode;
     private String vacationName;
-    private int days;
+    private float days;
 
     @QueryProjection
-    public VacationDto(String vacationCode, String vacationName, int days){
+    public VacationDto(String vacationCode, String vacationName, float days){
         this.vacationCode = vacationCode;
         this.vacationName = vacationName;
         this.days = days;

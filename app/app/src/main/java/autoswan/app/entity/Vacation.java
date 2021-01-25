@@ -22,12 +22,12 @@ public class Vacation {
     @Column(name = "VACATION_NAME", columnDefinition = "VARCHAR(30)")
     private String name;
 
-    private int days;
+    private float days;
 
     @Column(columnDefinition = "VARCHAR(1)")
     private String useYn;
 
-    public Vacation(String vacationCode, String vacationName, int days){
+    public Vacation(String vacationCode, String vacationName, float days){
         this.code = vacationCode;
         this.name = vacationName;
         this.days = days;

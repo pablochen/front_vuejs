@@ -1,8 +1,9 @@
 package autoswan.app.repository;
 
 import autoswan.app.dto.QUserDto;
-import autoswan.app.dto.UserCond;
 import autoswan.app.dto.UserDto;
+import autoswan.app.entity.QDept;
+import autoswan.app.entity.QPosition;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
@@ -12,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import javax.persistence.EntityManager;
 import java.util.List;
 
+import static autoswan.app.entity.QDept.dept;
+import static autoswan.app.entity.QPosition.position;
 import static autoswan.app.entity.QUser.user;
 
 public class UserRepositoryImpl implements UserRepositoryCustom{
@@ -23,13 +26,19 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
     }
 
     @Override
-    public Page<UserDto> findUsers(UserCond userCond, Pageable pageable){
+    public Page<UserDto> findUsers(UserDto userDto, Pageable pageable){
+        QDept qDept = dept;
+        QPosition qPosition = position;
 
         List<UserDto> content = queryFactory
-                .select(new QUserDto(user.id, user.code, user.name, user.deptCode, user.positionCode, user.totalVacCnt, user.joinDate))
+                .select(new QUserDto(user.id, user.code, user.name, user.deptCode, dept.name, user.positionCode, position.name, user.totalVacCnt, user.joinDate))
                 .from(user)
+                .leftJoin(dept)
+                    .on(user.deptCode.eq(dept.code))
+                .leftJoin(position)
+                    .on(user.positionCode.eq(position.code))
                 .where(
-                        userIdEq(userCond.getId()),
+                        userIdEq(userDto.getId()),
                         userAlive()
                 )
                 .orderBy(user.id.asc())
@@ -38,15 +47,12 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
                 .fetch();
 
         long total = queryFactory
-                .select(new QUserDto(user.id, user.code, user.name, user.deptCode, user.positionCode, user.totalVacCnt, user.joinDate))
+                .select(new QUserDto(user.id, user.code, user.name, user.deptCode, dept.name, user.positionCode, position.name, user.totalVacCnt, user.joinDate))
                 .from(user)
                 .where(
-                        userIdEq(userCond.getId()),
+                        userIdEq(userDto.getId()),
                         userAlive()
                 )
-                .orderBy(user.id.asc())
-                .offset(pageable.getOffset())
-                .limit(pageable.getPageSize())
                 .fetchCount();
 
         return new PageImpl<>(content, pageable, total);
