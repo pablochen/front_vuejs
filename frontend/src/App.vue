@@ -3,7 +3,7 @@
   <div id="app">
     <div class="nav-bar"><router-link to="/masterApp"><button>마스터 정보 설정</button></router-link></div>
     <div class="nav-bar"><router-link to="/vacationApp"><button>휴가 신청</button></router-link></div>
-    <div class="nav-bar"><router-link to="/helloWorld"><button>헬로 월드</button></router-link></div>
+    <div class="nav-bar"><router-link to="/calendarApp"><button>휴가 달력</button></router-link></div>
     <router-view></router-view>
   </div>
 </template>
