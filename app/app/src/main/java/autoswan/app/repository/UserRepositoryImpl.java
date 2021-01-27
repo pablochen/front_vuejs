@@ -31,7 +31,8 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
         QPosition qPosition = position;
 
         List<UserDto> content = queryFactory
-                .select(new QUserDto(user.id, user.code, user.name, user.deptCode, dept.name, user.positionCode, position.name, user.totalVacCnt, user.joinDate))
+                .select(new QUserDto(user.id, user.code, user.name, user.deptCode, dept.name,
+                        user.positionCode, position.name, user.totalVacCnt, user.remainVacCnt, user.joinDate))
                 .from(user)
                 .leftJoin(dept)
                     .on(user.deptCode.eq(dept.code))
@@ -47,7 +48,8 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
                 .fetch();
 
         long total = queryFactory
-                .select(new QUserDto(user.id, user.code, user.name, user.deptCode, dept.name, user.positionCode, position.name, user.totalVacCnt, user.joinDate))
+                .select(new QUserDto(user.id, user.code, user.name, user.deptCode, dept.name,
+                        user.positionCode, position.name, user.totalVacCnt, user.remainVacCnt, user.joinDate))
                 .from(user)
                 .where(
                         userIdEq(userDto.getId()),

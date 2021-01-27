@@ -10,4 +10,6 @@ import java.util.List;
 public interface UserRepository extends JpaRepository<User, Integer>, UserRepositoryCustom {
     Page<User> findByUseYnEquals(String useYn, Pageable pageable);
     List<User> findAllByIdIn(List<Integer> ids);
+
+    User findByCodeEquals(String UserCode);
 }

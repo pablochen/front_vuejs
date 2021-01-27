@@ -28,8 +28,11 @@ public class User {
     @Column(columnDefinition = "VARCHAR(3)")
     private String positionCode;
 
-    @Column(columnDefinition = "INT")
-    private int totalVacCnt;
+    @Column(columnDefinition = "FLOAT")
+    private float totalVacCnt;
+
+    @Column(columnDefinition = "FLOAT")
+    private float remainVacCnt;
 
     @Column(columnDefinition = "VARCHAR(8)")
     private String joinDate;
@@ -43,6 +46,7 @@ public class User {
         this.deptCode = deptCode;
         this.positionCode = positionCode;
         this.totalVacCnt = 15;
+        this.remainVacCnt = 15;
         this.joinDate = joinDate;
         this.useYn = "Y";
     }
@@ -55,6 +59,7 @@ public class User {
                 "deptCode : " + this.deptCode +
                 "positionCode : " + this.positionCode +
                 "totalVacCnt : " + this.totalVacCnt +
+                "remainVacCnt : " + this.remainVacCnt +
                 "joinDate : " + this.joinDate;
         return content;
     }

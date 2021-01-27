@@ -54,6 +54,7 @@ export default {
         { header: '직책코드', name: 'positionCode'},
         { header: '직책명',   name: 'positionName'},
         { header: '보유연차', name: 'totalVacCnt' },
+        { header: '보유연차', name: 'remainVacCnt' },
         { header: '입사일',   name: 'joinDate' }
       ],
       data: [],

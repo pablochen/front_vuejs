@@ -25,14 +25,13 @@ export default {
     },
     selectUser: function() {
         let keys = this.$refs.tuiGrid.invoke('getCheckedRows')
+
         if(keys.length != 1){
           alert("한명만 선택해주세요")
           return;
         }
 
-        console.log(keys[0].id)
-        console.log(keys[0].userCode)
-        console.log(keys[0].userName)
+        this.$emit('setUserInfo', keys[0])
     }
   },
   beforeMount(){
@@ -49,6 +48,7 @@ export default {
         { header: '직책코드', name: 'positionCode'},
         { header: '직책명',   name: 'positionName'},
         { header: '보유연차', name: 'totalVacCnt' },
+        { header: '잔여연차', name: 'remainVacCnt' },
         { header: '입사일',   name: 'joinDate' }
       ],
       data: [],

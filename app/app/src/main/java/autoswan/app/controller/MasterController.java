@@ -81,7 +81,7 @@ public class MasterController {
     }
 
     @PostMapping("/setVacation")
-    public void setDept (@RequestBody VacationDto vacationDto){
+    public void setVacation (@RequestBody VacationDto vacationDto){
         Vacation vacation = new Vacation(vacationDto.getVacationCode(), vacationDto.getVacationName(), vacationDto.getDays());
         vacationRepository.save(vacation);
     }
