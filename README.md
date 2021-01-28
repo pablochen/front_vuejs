@@ -10,7 +10,7 @@
 
 ## 빌드 및 실행
 - FrontEnd 
-  - 실행 dir : frontend
+  - 실행 dir : /frontend
   - npm install
   - npm run dev
 - BackEnd
