@@ -9,7 +9,6 @@
 - TuiGrid, Full-Calendar
 
 ## 빌드 및 실행
-1) Database
 - FrontEnd 
   - 실행 dir : frontend
   - npm install
