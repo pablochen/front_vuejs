@@ -30,7 +30,7 @@ public class VacationController {
     }
 
     @PostMapping("/setVacationHist")
-    public void setVacationHist (@RequestBody VacationHistDto vacationHistDto){
+    public ResponseEntity setVacationHist (@RequestBody VacationHistDto vacationHistDto){
         VacationHist vacationHist = new VacationHist(vacationHistDto.getUserCode(), vacationHistDto.getVacationCode(),
                                                         vacationHistDto.getStartDate(), vacationHistDto.getEndDate(), vacationHistDto.getDays());
         vacationHistRepository.save(vacationHist);
@@ -38,10 +38,11 @@ public class VacationController {
         User user = userRepository.findByCodeEquals(vacationHistDto.getUserCode());
         user.setRemainVacCnt(user.getRemainVacCnt() - vacationHistDto.getDays());
         userRepository.save(user);
+        return new ResponseEntity<>(vacationHist, HttpStatus.OK);
     }
 
-    @PostMapping("/deleteVacationHists")
-    public void deleteVacationHists (@RequestBody VacationHistDto vacationHistDto){
+    @PutMapping("/deleteVacationHists")
+    public ResponseEntity deleteVacationHists (@RequestBody VacationHistDto vacationHistDto){
         List<VacationHist> delVacationHists = vacationHistRepository.findAllByIdIn(vacationHistDto.getIds());
         for(VacationHist delVacationHist: delVacationHists) {
             delVacationHist.setUseYn("N");
@@ -51,5 +52,6 @@ public class VacationController {
             user.setRemainVacCnt(user.getRemainVacCnt() + delVacationHist.getDays());
             userRepository.save(user);
         }
+        return new ResponseEntity<>(delVacationHists, HttpStatus.OK);
     }
 }

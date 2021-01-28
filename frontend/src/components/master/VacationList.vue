@@ -20,7 +20,9 @@ export default {
       this.$http.get(`${baseURI}/master/getVacationList`)
       .then((result) => {
         this.$refs.tuiGrid.invoke('appendRows', result.data.content);
-      })
+      }).catch(error=>{
+        console.log(error)
+      });
     }
   },
   beforeMount(){

@@ -31,10 +31,9 @@ export default {
   methods: {
     getVacationHistList: function(key) {
       const data = { params:{ userCode : '' } }
-      const headers = { "Content-Type": "application/json" }
       const baseURI = 'http://localhost:8080';
 
-      this.$http.get(`${baseURI}/vacation/getVacationHistList`, data, headers)
+      this.$http.get(`${baseURI}/vacation/getVacationHistList`, data)
       .then((result) => {
         this.vacationHistList = result.data.content
         this.reRender('CalendarList')

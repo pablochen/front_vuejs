@@ -40,16 +40,14 @@ export default {
         joinDate : userRow.joinDate
       }
 
-      const headers = {
-        "Content-Type": "application/json"
-      }
-
       const baseURI = 'http://localhost:8080';
-      this.$http.post(`${baseURI}/master/setUser`, data, headers)
+      this.$http.post(`${baseURI}/master/setUser`, data)
       .then(res => {
         this.$emit('reRender', 'UserList')
         this.$emit('reRender', 'UserInput')
-      })
+      }).catch(error=>{
+        console.log(error)
+      });
     }
   },
   created() {

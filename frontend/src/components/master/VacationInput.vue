@@ -29,16 +29,14 @@ export default {
         days : vacationRow.days
       }
 
-      const headers = {
-        "Content-Type": "application/json"
-      }
-
       const baseURI = 'http://localhost:8080';
-      this.$http.post(`${baseURI}/master/setVacation`, data, headers)
+      this.$http.post(`${baseURI}/master/setVacation`, data)
       .then(res => {
         this.$emit('reRender', 'VacationList')
         this.$emit('reRender', 'VacationInput')
-      })
+      }).catch(error=>{
+        console.log(error)
+      });
     }
   },
   created() {

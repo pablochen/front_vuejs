@@ -29,16 +29,14 @@ export default {
         positionName : positionRow.name
       }
 
-      const headers = {
-        "Content-Type": "application/json"
-      }
-
       const baseURI = 'http://localhost:8080';
-      this.$http.post(`${baseURI}/master/setPosition`, data, headers)
+      this.$http.post(`${baseURI}/master/setPosition`, data)
       .then(res => {
         this.$emit('reRender', 'PositionList')
         this.$emit('reRender', 'PositionInput')
-      })
+      }).catch(error=>{
+        console.log(error)
+      });
     }
   },
   created() {

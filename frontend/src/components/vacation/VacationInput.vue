@@ -36,6 +36,11 @@ export default {
           return
       }
 
+      if(Number(vacaRow.startDate) > Number(vacaRow.endDate)){
+          alert("시작일이 종료일보다 늦습니다")
+          return
+      }
+
       if(Number(vacaRow.remainVacCnt) < Number(vacaRow.days)){
           alert("연차 부족")
           return
@@ -61,7 +66,9 @@ export default {
         this.$emit('reRender', 'UserList')
         this.$emit('reRender', 'VacationInput')
         this.$emit('reRender', 'VacationHistList')
-      })
+      }).catch(error=>{
+        console.log(error)
+      });
     },
     calDays: function() {
       let thisRow = this.$refs.tuiGrid.invoke('getRow', 0)

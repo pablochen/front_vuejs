@@ -21,7 +21,9 @@ export default {
       this.$http.get(`${baseURI}/master/getUserList`)
       .then((result) => {
         this.$refs.tuiGrid.invoke('appendRows', result.data.content);
-      })
+      }).catch(error=>{
+        console.log(error)
+      });
     },
     selectUser: function() {
         let keys = this.$refs.tuiGrid.invoke('getCheckedRows')

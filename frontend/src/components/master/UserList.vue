@@ -30,7 +30,7 @@ export default {
         const data = {ids : ids}
 
         const baseURI = 'http://localhost:8080';
-        this.$http.post(`${baseURI}/master/deleteUsers`, data)
+        this.$http.put(`${baseURI}/master/deleteUsers`, data)
         .then((result) => {
           this.$refs.tuiGrid.invoke('removeCheckedRows');
         })

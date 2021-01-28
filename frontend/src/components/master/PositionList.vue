@@ -21,7 +21,9 @@ export default {
       .then((result) => {
         this.$refs.tuiGrid.invoke('appendRows', result.data.content);
         this.$emit('rePositionItems', result.data.content)
-      })
+      }).catch(error=>{
+        console.log(error)
+      });
     }
   },
   beforeMount(){

@@ -36,18 +36,20 @@ public class MasterController {
     }
 
     @PostMapping("/setUser")
-    public void setUser (@RequestBody UserDto userDto){
+    public ResponseEntity setUser (@RequestBody UserDto userDto){
         User user = new User(userDto.getUserCode(), userDto.getUserName(), userDto.getDeptCode(), userDto.getPositionCode(), userDto.getJoinDate());
         userRepository.save(user);
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
-    @PostMapping("/deleteUsers")
-    public void deleteUsers (@RequestBody UserDto userDto){
+    @PutMapping("/deleteUsers")
+    public ResponseEntity deleteUsers (@RequestBody UserDto userDto){
         List<User> delUsers = userRepository.findAllByIdIn(userDto.getIds());
         for(User delUser: delUsers) {
             delUser.setUseYn("N");
             userRepository.save(delUser);
         }
+        return new ResponseEntity<>(delUsers, HttpStatus.OK);
     }
 
     @GetMapping("/getDeptList")
@@ -57,9 +59,10 @@ public class MasterController {
     }
 
     @PostMapping("/setDept")
-    public void setDept (@RequestBody DeptDto deptDto){
+    public ResponseEntity setDept (@RequestBody DeptDto deptDto){
         Dept dept = new Dept(deptDto.getDeptCode(), deptDto.getDeptName());
         deptRepository.save(dept);
+        return new ResponseEntity<>(dept, HttpStatus.OK);
     }
 
     @GetMapping("/getPositionList")
@@ -69,9 +72,10 @@ public class MasterController {
     }
 
     @PostMapping("/setPosition")
-    public void setDept (@RequestBody PositionDto positionDto){
+    public ResponseEntity setDept (@RequestBody PositionDto positionDto){
         Position position = new Position(positionDto.getPositionCode(), positionDto.getPositionName());
         positionRepository.save(position);
+        return new ResponseEntity<>(position, HttpStatus.OK);
     }
 
     @GetMapping("/getVacationList")
@@ -81,9 +85,10 @@ public class MasterController {
     }
 
     @PostMapping("/setVacation")
-    public void setVacation (@RequestBody VacationDto vacationDto){
+    public ResponseEntity setVacation (@RequestBody VacationDto vacationDto){
         Vacation vacation = new Vacation(vacationDto.getVacationCode(), vacationDto.getVacationName(), vacationDto.getDays());
         vacationRepository.save(vacation);
+        return new ResponseEntity<>(vacation, HttpStatus.OK);
     }
 
 }

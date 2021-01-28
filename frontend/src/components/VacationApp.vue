@@ -51,7 +51,9 @@ export default {
       .then((result) => {
         this.vacationItems = result.data.content
         this.reRender('VacationInput')
-      })
+      }).catch(error=>{
+        console.log(error)
+      });
     },
     reRender(compName) {
       switch (compName) {

@@ -55,7 +55,7 @@ export default {
       }
 
       const baseURI = 'http://localhost:8080';
-      this.$http.post(`${baseURI}/vacation/deleteVacationHists`, data, headers)
+      this.$http.put(`${baseURI}/vacation/deleteVacationHists`, data, headers)
       .then(res => {
         this.$emit('reRender', 'UserList')
         this.$emit('reRender', 'VacationInput')

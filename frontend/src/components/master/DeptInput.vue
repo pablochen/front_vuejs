@@ -29,16 +29,14 @@ export default {
         deptName : deptRow.name
       }
 
-      const headers = {
-        "Content-Type": "application/json"
-      }
-
       const baseURI = 'http://localhost:8080';
-      this.$http.post(`${baseURI}/master/setDept`, data, headers)
+      this.$http.post(`${baseURI}/master/setDept`, data)
       .then(res => {
         this.$emit('reRender', 'DeptList')
         this.$emit('reRender', 'DeptInput')
-      })
+      }).catch(error=>{
+        console.log(error)
+      });
     }
   },
   created() {

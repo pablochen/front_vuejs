@@ -9,6 +9,8 @@ import com.querydsl.jpa.impl.JPAQueryFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import java.util.List;
@@ -26,6 +28,7 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
     }
 
     @Override
+    @Transactional(readOnly=true, propagation = Propagation.SUPPORTS)
     public Page<UserDto> findUsers(UserDto userDto, Pageable pageable){
         QDept qDept = dept;
         QPosition qPosition = position;

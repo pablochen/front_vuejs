@@ -11,6 +11,7 @@ import java.util.List;
 public class VacationHistDto {
     private int id;
     private String userCode;
+    private String userName;
     private String vacationCode;
     private String vacationName;
     private String startDate;
@@ -21,9 +22,10 @@ public class VacationHistDto {
     private List<Integer> ids;
 
     @QueryProjection
-    public VacationHistDto(int id, String userCode, String vacationCode, String vacationName, String startDate, String endDate, float days, String useYn){
+    public VacationHistDto(int id, String userCode, String userName, String vacationCode, String vacationName, String startDate, String endDate, float days, String useYn){
         this.id = id;
         this.userCode = userCode;
+        this.userName = userName;
         this.vacationCode = vacationCode;
         this.vacationName = vacationName;
         this.startDate = startDate;
