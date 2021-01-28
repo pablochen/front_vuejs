@@ -1,0 +1,13 @@
+docker-compose up -d
+
+docker exec -it lyh-mysql /bin/bash
+
+mysql -u root -p
+
+USE mysql;
+SELECT User, Host, plugin FROM mysql.user;
+
+CREATE USER 'dbuser'@'%' IDENTIFIED BY 'password';
+GRANT ALL PRIVILEGES ON *.* TO 'dbuser'@'%' ;
+FLUSH PRIVILEGES ;
+QUIT
