@@ -15,7 +15,7 @@
   - npm run dev
 - BackEnd
   - 실행 dir : /app/app
-  - gradlew build && java -jar app/libs/finance-0.0.1-SNAPSHOT.jar
+  - gradlew build && java -jar build/libs/app-0.0.1-SNAPSHOT.jar
 - Database
   - 실행 dir : /database
   - docker-compose up -d
