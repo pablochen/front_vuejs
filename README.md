@@ -54,3 +54,5 @@
 ## 기타 
   - 테이블 정의서 : /database/테이블_정의서_V0.0
   - 테이블 관계도 : /database/테이블_관계도_V0.0
+  - 설치 매뉴얼 : https://youtu.be/1Gfa09ZlW94
+  - 실행 프로세스 매뉴얼 : https://youtu.be/JdoT0C0_Ac0
