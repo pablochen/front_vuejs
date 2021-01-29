@@ -34,8 +34,7 @@
     - 신청/취소시 자동 갱신
   - [x] 달력 UI 상에서 연차휴가 조회할 수 있는 화면
     - 신청된 휴가에 대해 달력 UI 상에 이름과 전일/반차 구분 표시
-  - [x] Backend 와 Frontend 어플리케이션을 하나의 git repository 에서 관리
-  - [x] README.md 파일에 간략한 실행방법 기재 필요
+
 
 ## 기술 요구사항
   - [x] Backend 와 Frontend 어플리케이션을 하나의 git repository 에서 관리
@@ -43,3 +42,7 @@
   - [x] VueJs + (css프레임워크) + (npm 패키지 구성 및 빌드)
   - [x] Java + SpringBoot + JPA or Mybatis + Maven or Gradle
   - [x] MySql with Docker + 테이블 정의서
+
+## 기타 
+  - 테이블 정의서 : /database/테이블_정의서_V0.0
+  - 테이블 관계도 : /database/테이블_관계도_V0.0
