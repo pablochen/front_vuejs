@@ -37,13 +37,13 @@ public class VacationHistRepositoryImpl implements VacationHistRepositoryCustom{
 
         List<VacationHistDto> content = queryFactory
                 .select(new QVacationHistDto(vacationHist.id, vacationHist.user.id, user.code, user.name,
-                                            vacationHist.vacation.id, vacation.code, vacation.name,
-                                            vacationHist.startDate, vacationHist.endDate, vacationHist.days, vacationHist.useYn))
-                .from(user)
-                .leftJoin(vacationHist)
-                    .on(user.id.eq(vacationHist.user.id))
+                        vacationHist.vacation.id, vacation.code, vacation.name,
+                        vacationHist.startDate, vacationHist.endDate, vacationHist.days, vacationHist.useYn))
+                .from(vacationHist)
                 .leftJoin(vacation)
                     .on(vacationHist.vacation.id.eq(vacation.id))
+                .leftJoin(user)
+                    .on(vacationHist.user.id.eq(user.id))
                 .where(
                         userIdEq(vacationHistDto.getUserId())
                 )
@@ -56,11 +56,11 @@ public class VacationHistRepositoryImpl implements VacationHistRepositoryCustom{
                 .select(new QVacationHistDto(vacationHist.id, vacationHist.user.id, user.code, user.name,
                         vacationHist.vacation.id, vacation.code, vacation.name,
                         vacationHist.startDate, vacationHist.endDate, vacationHist.days, vacationHist.useYn))
-                .from(user)
-                .leftJoin(vacationHist)
-                    .on(user.id.eq(vacationHist.user.id))
+                .from(vacationHist)
                 .leftJoin(vacation)
                     .on(vacationHist.vacation.id.eq(vacation.id))
+                .leftJoin(user)
+                    .on(vacationHist.user.id.eq(user.id))
                 .where(
                         userIdEq(vacationHistDto.getUserId())
                 )

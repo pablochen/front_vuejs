@@ -35,6 +35,8 @@ export default {
 
       this.$http.get(`${baseURI}/vacation/getVacationHistList`, data)
       .then((result) => {
+        console.log('result')
+        console.log(result)
         this.vacationHistList = result.data.content
         this.reRender('CalendarList')
       }).catch(error=>{

@@ -27,7 +27,11 @@ export default {
   created() {
     items = []
     let resCon = this.vacationHistList
+    console.log('resCon')
+    console.log(resCon)
     resCon.forEach((vacation, index)=>{
+      console.log('vacation')
+      console.log(vacation)
       const titleStr = vacation.userName+'('+vacation.vacationName+')'
       const startStr = vacation.startDate.substr(0,4)+'-'+vacation.startDate.substr(4,2)+'-'+vacation.startDate.substr(6,2)
       const endStr =  vacation.endDate.substr(0,4)+'-'+vacation.endDate.substr(4,2)+'-'+vacation.endDate.substr(6,2)
@@ -41,8 +45,8 @@ export default {
       }
     })
 
-    console.log('비교')
-    console.log(items)
+    // console.log('비교')
+    // console.log(items)
 
     this.fcEvents = items
 
