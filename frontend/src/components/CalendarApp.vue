@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     getVacationHistList: function(key) {
-      const data = { params:{ userCode : '' } }
+      const data = { params:{ userId : 0 } }
       const baseURI = 'http://localhost:8080';
 
       this.$http.get(`${baseURI}/vacation/getVacationHistList`, data)

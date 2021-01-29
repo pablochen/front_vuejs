@@ -26,8 +26,8 @@ export default {
     setUser: function() {
       const userRow = this.$refs.tuiGrid.invoke('getData')[0];
 
-      if(userRow.code==null || userRow.name==null || userRow.deptCode==null ||
-          userRow.positionCode==null || userRow.joinDate==null){
+      if(userRow.code==null || userRow.name==null || userRow.deptId==null ||
+          userRow.positionId==null || userRow.joinDate==null){
           alert("모든 값 필요")
           return
       }
@@ -35,8 +35,8 @@ export default {
       const data = {
         userCode : userRow.code,
         userName : userRow.name,
-        deptCode : userRow.deptCode,
-        positionCode : userRow.positionCode,
+        deptId : Number(userRow.deptId),
+        positionId : Number(userRow.positionId),
         joinDate : userRow.joinDate
       }
 
@@ -53,20 +53,21 @@ export default {
   created() {
     let deptItems = [];
     this.depts.forEach((dept)=>{
-      deptItems.push({text:dept.name, value:dept.code});
+      deptItems.push({text:dept.name, value:String(dept.id)});
     })
 
     let positionItems = [];
     this.positions.forEach((position)=>{
-      positionItems.push({text:position.name, value:position.code});
+      positionItems.push({text:position.name, value:String(position.id)});
     })
+
 
     this.gridProps = {
       columns: [
         { header: '사번',     name: 'code',         editor: 'text' },
         { header: '사원명',   name: 'name',         editor: 'text' },
-        { header: '부서',     name: 'deptCode',     editor: { type: 'select', options: { listItems: deptItems } },     formatter: 'listItemText'},
-        { header: '직책',     name: 'positionCode', editor: { type: 'select', options: { listItems: positionItems } }, formatter: 'listItemText'},
+        { header: '부서',     name: 'deptId',       editor: { type: 'select', options: { listItems: deptItems } },     formatter: 'listItemText'},
+        { header: '직책',     name: 'positionId',   editor: { type: 'select', options: { listItems: positionItems } }, formatter: 'listItemText'},
         { header: '입사일',   name: 'joinDate',     editor: 'text' }
       ],
       data: []

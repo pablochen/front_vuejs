@@ -9,9 +9,11 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class VacationHistDto {
-    private int id;
+    private int vacationHistId;
+    private int userId;
     private String userCode;
     private String userName;
+    private int vacationId;
     private String vacationCode;
     private String vacationName;
     private String startDate;
@@ -19,13 +21,18 @@ public class VacationHistDto {
     private String useYn;
 
     private float days;
-    private List<Integer> ids;
+    private List<Integer> vacationHistIds;
 
     @QueryProjection
-    public VacationHistDto(int id, String userCode, String userName, String vacationCode, String vacationName, String startDate, String endDate, float days, String useYn){
-        this.id = id;
+    public VacationHistDto(int vacationHistId,
+                           int userId, String userCode, String userName,
+                           int vacationId, String vacationCode, String vacationName,
+                           String startDate, String endDate, float days, String useYn){
+        this.vacationHistId = vacationHistId;
+        this.userId = userId;
         this.userCode = userCode;
         this.userName = userName;
+        this.vacationId = vacationId;
         this.vacationCode = vacationCode;
         this.vacationName = vacationName;
         this.startDate = startDate;
@@ -34,12 +41,12 @@ public class VacationHistDto {
         this.useYn = useYn;
     }
 
-    public VacationHistDto(String userCode){
-        this.userCode = userCode;
+    public VacationHistDto(int userId){
+        this.userId = userId;
     }
 
-    public VacationHistDto(List<Integer> ids){
-        this.ids = ids;
+    public VacationHistDto(List<Integer> vacationHistIds){
+        this.vacationHistIds = vacationHistIds;
     }
 
 }

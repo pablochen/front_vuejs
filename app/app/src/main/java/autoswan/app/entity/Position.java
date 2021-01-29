@@ -1,5 +1,6 @@
 package autoswan.app.entity;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -10,6 +11,7 @@ import javax.persistence.*;
 @Getter @Setter
 @NoArgsConstructor
 @SequenceGenerator(name="POSITION_SEQ_GEN", sequenceName="POSITION_SEQ", initialValue=1, allocationSize=1)
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Position {
     @Id
     @Column(name = "POSITION_ID")
@@ -29,5 +31,9 @@ public class Position {
         this.code = positionCode;
         this.name = positionName;
         this.useYn = "Y";
+    }
+
+    public Position(String positionCode){
+        this.code = positionCode;
     }
 }

@@ -46,7 +46,7 @@ export default {
   created() {
     this.gridProps = {
       columns: [
-        { header: '사원ID',   name: 'id' },
+        { header: '사원ID',   name: 'userId' },
         { header: '사번',     name: 'userCode' },
         { header: '사원명',   name: 'userName' },
         { header: '부서코드', name: 'deptCode' },

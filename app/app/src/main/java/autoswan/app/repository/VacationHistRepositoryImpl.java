@@ -19,7 +19,6 @@ import java.util.List;
 import static autoswan.app.entity.QUser.user;
 import static autoswan.app.entity.QVacation.vacation;
 import static autoswan.app.entity.QVacationHist.vacationHist;
-import static org.springframework.util.StringUtils.hasText;
 
 public class VacationHistRepositoryImpl implements VacationHistRepositoryCustom{
 
@@ -37,15 +36,16 @@ public class VacationHistRepositoryImpl implements VacationHistRepositoryCustom{
         QVacationHist qVacationHist = vacationHist;
 
         List<VacationHistDto> content = queryFactory
-                .select(new QVacationHistDto(vacationHist.id, vacationHist.userCode, user.name, vacationHist.vacationCode, vacation.name,
-                        vacationHist.startDate, vacationHist.endDate, vacationHist.days, vacationHist.useYn))
-                .from(vacationHist)
+                .select(new QVacationHistDto(vacationHist.id, vacationHist.user.id, user.code, user.name,
+                                            vacationHist.vacation.id, vacation.code, vacation.name,
+                                            vacationHist.startDate, vacationHist.endDate, vacationHist.days, vacationHist.useYn))
+                .from(user)
+                .leftJoin(vacationHist)
+                    .on(user.id.eq(vacationHist.user.id))
                 .leftJoin(vacation)
-                    .on(vacationHist.vacationCode.eq(vacation.code))
-                .leftJoin(user)
-                    .on(vacationHist.userCode.eq(user.code))
+                    .on(vacationHist.vacation.id.eq(vacation.id))
                 .where(
-                        userCodeEq(vacationHistDto.getUserCode())
+                        userIdEq(vacationHistDto.getUserId())
                 )
                 .orderBy(vacationHist.id.asc())
                 .offset(pageable.getOffset())
@@ -53,23 +53,24 @@ public class VacationHistRepositoryImpl implements VacationHistRepositoryCustom{
                 .fetch();
 
         long total = queryFactory
-                .select(new QVacationHistDto(vacationHist.id, vacationHist.userCode, user.name, vacationHist.vacationCode, vacation.name,
+                .select(new QVacationHistDto(vacationHist.id, vacationHist.user.id, user.code, user.name,
+                        vacationHist.vacation.id, vacation.code, vacation.name,
                         vacationHist.startDate, vacationHist.endDate, vacationHist.days, vacationHist.useYn))
-                .from(vacationHist)
+                .from(user)
+                .leftJoin(vacationHist)
+                    .on(user.id.eq(vacationHist.user.id))
                 .leftJoin(vacation)
-                .on(vacationHist.vacationCode.eq(vacation.code))
-                .leftJoin(user)
-                .on(vacationHist.userCode.eq(user.code))
+                    .on(vacationHist.vacation.id.eq(vacation.id))
                 .where(
-                        userCodeEq(vacationHistDto.getUserCode())
+                        userIdEq(vacationHistDto.getUserId())
                 )
                 .fetchCount();
 
         return new PageImpl<>(content, pageable, total);
     }
 
-    public BooleanExpression userCodeEq(String userCode){
-        return hasText(userCode) ? vacationHist.userCode.eq(userCode) : null;
+    public BooleanExpression userIdEq(Integer userId){
+        return (userId!=null && userId!=0) ? vacationHist.user.id.eq(userId) : null;
     }
 
 }

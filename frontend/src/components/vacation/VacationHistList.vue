@@ -19,7 +19,7 @@ export default {
     getVacationHistList: function(key) {
       const data = {
         params:{
-          userCode : key.userCode
+          userId : key.userId
         }
       }
 
@@ -41,14 +41,15 @@ export default {
       let keys = this.$refs.tuiGrid.invoke('getCheckedRows')
       console.log(keys)
 
-      let ids = []
+      let vacationHistIds = []
       keys.forEach((item, i) => {
-        ids.push(item.id)
+        vacationHistIds.push(item.vacationHistId)
       });
 
       const data = {
-        ids : ids
+        vacationHistIds : vacationHistIds
       }
+      console.log(data)
 
       const headers = {
         "Content-Type": "application/json"
@@ -66,12 +67,12 @@ export default {
   created() {
     this.gridProps = {
       columns: [
-        { header: '휴가내역ID', name: 'id' },
+        { header: '휴가내역ID', name: 'vacationHistId' },
         { header: '휴가코드',   name: 'vacationCode' },
         { header: '휴가명',     name: 'vacationName' },
         { header: '시작일',     name: 'startDate'},
         { header: '종료일',     name: 'endDate'},
-        { header: '사용일수',     name: 'days'},
+        { header: '사용일수',   name: 'days'},
         { header: '사용',       name: 'useYn' }
       ],
       data: [],

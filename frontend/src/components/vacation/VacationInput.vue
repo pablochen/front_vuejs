@@ -22,16 +22,16 @@ export default {
   },
   methods: {
     setUser: function(user) {
-      // 두번 클릭해야 넘어가는 버그. props 대신 데이터 파라메터로 해결
-      this.$refs.tuiGrid.invoke('setValue', 0, 'code', user.userCode)
-      this.$refs.tuiGrid.invoke('setValue', 0, 'name', user.userName)
+      this.$refs.tuiGrid.invoke('setValue', 0, 'userId', user.userId)
+      this.$refs.tuiGrid.invoke('setValue', 0, 'userCode', user.userCode)
+      this.$refs.tuiGrid.invoke('setValue', 0, 'userName', user.userName)
       this.$refs.tuiGrid.invoke('setValue', 0, 'remainVacCnt', user.remainVacCnt)
     },
     setVacationHist: function() {
       const vacaRow = this.$refs.tuiGrid.invoke('getData')[0];
 
-      if(vacaRow.code==null || vacaRow.name==null || vacaRow.remainVacCnt==null ||
-        vacaRow.startDate==null || vacaRow.endDate==null || vacaRow.vacationCode==null || vacaRow.days==null){
+      if(vacaRow.userId==null || vacaRow.userCode==null || vacaRow.userName==null || vacaRow.remainVacCnt==null ||
+        vacaRow.startDate==null || vacaRow.endDate==null || vacaRow.vacationId==null || vacaRow.days==null){
           alert("모든 값 필요")
           return
       }
@@ -46,11 +46,11 @@ export default {
           return
       }
 
-      let vacaCode = vacaRow.vacationCode.split(':')[0]
+      let vacaId = vacaRow.vacationId.split(':')[0]
 
       const data = {
-        userCode : vacaRow.code,
-        vacationCode : vacaCode,
+        userId : vacaRow.userId,
+        vacationId : Number(vacaId),
         startDate : vacaRow.startDate,
         endDate : vacaRow.endDate,
         days : vacaRow.days
@@ -74,9 +74,10 @@ export default {
       let thisRow = this.$refs.tuiGrid.invoke('getRow', 0)
       if(thisRow.startDate != null && thisRow.startDate != '' &&
          thisRow.endDate != null && thisRow.endDate != '' &&
-         thisRow.vacationCode != null && thisRow.vacationCode != ''){
+         thisRow.vacationId != null && thisRow.vacationId != '' &&
+         Number(thisRow.startDate) < Number(thisRow.endDate) ){
         let dateBetween = this.getDateBetween(thisRow.startDate, thisRow.endDate)
-        let days = Number(thisRow.vacationCode.split(':')[1])
+        let days = Number(thisRow.vacationId.split(':')[1])
 
         this.$refs.tuiGrid.invoke('setValue', 0, 'days', dateBetween*days, false)
       }
@@ -92,18 +93,19 @@ export default {
   created() {
     let vacations = []
     this.vacationItems.forEach((vacation)=>{
-      vacations.push({text:vacation.name, value:vacation.code + ":" + vacation.days});
+      vacations.push({text:vacation.name, value:vacation.id + ":" + vacation.days});
     })
 
     this.gridProps = {
       columns: [
-        { header: '사번',     name: 'code'},
-        { header: '사원명',   name: 'name'},
+        { header: '사원ID',   name: 'userId'},
+        { header: '사번',     name: 'userCode'},
+        { header: '사원명',   name: 'userName'},
         { header: '잔여연차', name: 'remainVacCnt'},
         { header: '시작일',   name: 'startDate',    editor: 'text',},
         { header: '종료일',   name: 'endDate',      editor: 'text'},
         /* 그리드 오류 : 휴가선택 셀 포커스 아웃 시, 헤더가 아닌 밸류 세팅 */
-        { header: '휴가선택', name: 'vacationCode', editor: { type: 'select', options: { listItems: vacations } }, onAfterChange(ev) { return; /* console.log(ev)} */ } },
+        { header: '휴가선택', name: 'vacationId', editor: { type: 'select', options: { listItems: vacations } }, onAfterChange(ev) { return; /* console.log(ev)} */ } },
         { header: '사용일수', name: 'days'}
       ],
       data: []

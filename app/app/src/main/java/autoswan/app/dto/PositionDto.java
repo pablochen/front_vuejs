@@ -7,11 +7,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class PositionDto {
+    private int positionId;
     private String positionCode;
     private String positionName;
 
     @QueryProjection
-    public PositionDto(String positionCode, String positionName){
+    public PositionDto(int positionId, String positionCode, String positionName){
+        this.positionId = positionId;
         this.positionCode = positionCode;
         this.positionName = positionName;
     }
