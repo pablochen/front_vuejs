@@ -22,6 +22,8 @@
   - docker exec -it lyh-mysql bash
   - mysql -u root -p
   - "password" 입력
+  - create database 'vacation';
+  - use vacation;
   - create user 'dbuser'@'%' identified by 'password';
   - grant all privileges on  *.* to 'dbuser'@'%';
   - flush privileges;
