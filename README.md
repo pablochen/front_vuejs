@@ -19,7 +19,13 @@
 - Database
   - 실행 dir : /database
   - docker-compose up -d
-
+  - docker exec -it lyh-mysql bash
+  - mysql -u root -p
+  - "password" 입력
+  - create user 'lyh'@'%' identified by 'password';
+  - grant all privileges on  *.* to 'lyh'@'%';
+  - flush privileges;
+  - quit
 
 ## 기능 요구사항
   - [x] 연차신청

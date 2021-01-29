@@ -25,10 +25,10 @@ export default {
     },
     deleteUser: function() {
         let keys = this.$refs.tuiGrid.invoke('getCheckedRows')
-        let ids = []
-        for (let i in keys){ ids.push(keys[i].id)}
-        const data = {ids : ids}
-
+        let userIds = []
+        for (let i in keys){ userIds.push(keys[i].userId)}
+        const data = {userIds : userIds}
+        console.log(data);
         const baseURI = 'http://localhost:8080';
         this.$http.put(`${baseURI}/master/deleteUsers`, data)
         .then((result) => {

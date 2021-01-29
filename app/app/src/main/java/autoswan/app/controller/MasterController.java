@@ -54,7 +54,7 @@ public class MasterController {
 
     @PutMapping("/deleteUsers")
     public ResponseEntity deleteUsers (@RequestBody UserDto userDto){
-        List<User> delUsers = userRepository.findAllByIdIn(userDto.getIds());
+        List<User> delUsers = userRepository.findAllByIdIn(userDto.getUserIds());
         for(User delUser: delUsers) {
             delUser.setUseYn("N");
             userRepository.save(delUser);

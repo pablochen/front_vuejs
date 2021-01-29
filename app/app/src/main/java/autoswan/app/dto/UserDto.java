@@ -25,7 +25,7 @@ public class UserDto {
     private float remainVacCnt;
     private String joinDate;
 
-    private List<Integer> ids;
+    private List<Integer> userIds;
 
     @QueryProjection
     public UserDto(int userId, String userCode, String userName,
