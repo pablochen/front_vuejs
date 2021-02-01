@@ -1,14 +1,21 @@
-version: "3" # 파일 규격 버전
-services: # 이 항목 밑에 실행하려는 컨테이너 들을 정의
-  db: # 서비스 명
-    image: mysql:8.0.18 # 사용할 이미지
-    container_name: lyh-mysql # 컨테이너 이름 설정
-    ports:
-      - "3306:3306" # 접근 포트 설정 (컨테이너 외부:컨테이너 내부)
-    environment: # -e 옵션
-      MYSQL_ROOT_PASSWORD: "password"  # MYSQL 패스워드 설정 옵션
+version: "2" 
+services:
+  db: 
+    image: mysql:8.0.18
+    container_name: lyh-mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_DATABASE: "vacation" 
+      MYSQL_USER: "tomcatuser"
+      MYSQL_PASSWORD: "password"
     command: # 명령어 실행
       - --character-set-server=utf8mb4
       - --collation-server=utf8mb4_unicode_ci
     volumes:
-      - /Users/J/datadir:/var/lib/mysql # -v 옵션 (다렉토리 마운트 설정)
+      - ./init/:/docker-entrypoint-initdb.d/
+      - ./datadir/:/var/lib/mysql
+    ports:
+      - "9876:3306"
+    expose:
+      - "9876"
