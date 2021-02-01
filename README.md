@@ -1,6 +1,7 @@
 # Vacation Program 
 
 ## 개발환경
+- Window10
 - VueJs + npm
 - Java8 +  SpringBoot
 - JPA +  QueryDsl
@@ -9,13 +10,6 @@
 - TuiGrid, Full-Calendar
 
 ## 빌드 및 실행
-- FrontEnd 
-  - 실행 dir : /frontend
-  - npm install
-  - npm run dev
-- BackEnd
-  - 실행 dir : /app/app
-  - gradlew build && java -jar build/libs/app-0.0.1-SNAPSHOT.jar
 - Database
   - 실행 dir : /database
   - docker-compose up -d
@@ -28,6 +22,15 @@
   - grant all privileges on  *.* to 'dbuser'@'%';
   - flush privileges;
   - quit
+
+- BackEnd
+  - 실행 dir : /app/app
+  - gradlew build && java -jar build/libs/app-0.0.1-SNAPSHOT.jar
+
+- FrontEnd 
+  - 실행 dir : /frontend
+  - npm install
+  - npm run dev
 
 ## 기능 요구사항
   - [x] 연차신청
@@ -54,3 +57,5 @@
 ## 기타 
   - 테이블 정의서 : /database/테이블_정의서_V0.0
   - 테이블 관계도 : /database/테이블_관계도_V0.0
+  - 설치 매뉴얼 : https://youtu.be/1Gfa09ZlW94 > cmd 동영상 녹화가 안되어서 "빌드 및 실행" 탭 참조
+  - 실행 프로세스 매뉴얼 : https://youtu.be/JdoT0C0_Ac0
