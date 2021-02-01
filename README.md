@@ -9,19 +9,10 @@
 - Gradle, Lombok
 - TuiGrid, Full-Calendar
 
-## 빌드 및 실행
+## 빌드 및 실행 : 순서대로 빌드 및 실행
 - Database
   - 실행 dir : /database
   - docker-compose up -d
-  - docker exec -it lyh-mysql bash
-  - mysql -u root -p
-  - "password" 입력
-  - create database vacation;
-  - use vacation;
-  - create user 'dbuser'@'%' identified by 'password';
-  - grant all privileges on  *.* to 'dbuser'@'%';
-  - flush privileges;
-  - quit
 
 - BackEnd
   - 실행 dir : /app/app
