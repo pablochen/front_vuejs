@@ -45,7 +45,11 @@
   - [x] Java + SpringBoot + JPA or Mybatis + Maven or Gradle
   - [x] MySql with Docker + 테이블 정의서
 
+## UML
+![테이블_관계도_V0 0](https://user-images.githubusercontent.com/20297475/106726703-0a3a3080-664e-11eb-8ceb-38ca9bad0783.jpg)
+
 ## 기타 
   - 테이블 정의서 : /database/테이블_정의서_V0.0
-  - 테이블 관계도 : /database/테이블_관계도_V0.0
   - 실행 프로세스 매뉴얼 : https://youtu.be/JdoT0C0_Ac0
+  - 도커 컴포즈를 통한 도커라이즈 및 단순화된 실행 : https://github.com/pablochen/3_infra_docker_compose
+     (Nginx 웹서버가 추가됨)

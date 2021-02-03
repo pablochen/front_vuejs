@@ -6,6 +6,15 @@ spring:
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       auto-commit: true
+
+  datasource:
+    url: jdbc:mysql://localhost:9876/vacation?serverTimezone=UTC
+    username: tomcatuser
+    password: password
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      auto-commit: true
+
   jpa:
     hibernate:
       ddl-auto: update
